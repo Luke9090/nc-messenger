@@ -1,15 +1,15 @@
 import openSocket from 'socket.io-client';
 
-export const connectToSocket = sendNewMessage => {
+export const connectToSocket = () => {
   const socket = openSocket('http://localhost:8000');
   return socket;
 };
 
-export const listenForMessages = (socket, sendNewMessage) => {
-  // listen on socket for new messages, call sendNewMessage with any received messages
-  sendNewMessage({ body: 'fake live message' });
+export const listenForMessages = (socket, receiveMessage) => {
+  // listen on socket for new messages, call receiveMessage with any received messages
+  receiveMessage({ body: 'fake live message' });
   socket.on('message', message => {
-    sendNewMessage(message);
+    receiveMessage(message);
   });
 };
 
