@@ -1,0 +1,24 @@
+.messageBody {
+  display: flex;
+  flex-direction: row;
+  border-style: solid;
+  margin: 10px;
+  height: 400px;
+  background-color: #ebe9e9;
+}
+.messageBody ul {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  list-style-type: none;
+  width: 100%;
+}
+.messageBody li {
+  padding: 10px;
+  text-align: left;
+}
+li:nth-child(even) {
+  background-color: #bdbaba;
+}
