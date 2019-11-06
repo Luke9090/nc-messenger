@@ -27,7 +27,8 @@ class App extends PureComponent {
   };
 
   messageSubmit = message => {
-    socketUtils.emitMessage(message);
+    const { socket } = this.state;
+    socketUtils.emitMessage(socket, { body: message });
   };
 
   render() {
