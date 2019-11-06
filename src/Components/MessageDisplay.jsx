@@ -12,7 +12,9 @@ class MessageDisplay extends PureComponent {
 
   componentDidUpdate(prevProps) {
     if (prevProps.messages.length !== this.props.messages.length) {
-      this.setState({ messages: this.props.messages });
+      this.setState({ messages: this.props.messages }, () => {
+        this.bottom.scrollIntoView();
+      });
     }
   }
 
@@ -28,6 +30,11 @@ class MessageDisplay extends PureComponent {
               </li>
             );
           })}
+          <div
+            ref={el => {
+              this.bottom = el;
+            }}
+          ></div>
         </ul>
       </div>
     );
