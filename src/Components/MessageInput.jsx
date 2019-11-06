@@ -1,26 +1,42 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
 class MessageInput extends PureComponent {
   state = {
-    messageInput: ""
+    messageInput: '',
+    nicknameInput: ''
   };
 
   handleChange = event => {
-    this.setState({ messageInput: event.target.value });
+    this.setState({ [event.target.id]: event.target.value });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.messageSubmit(this.state.messageInput);
-    this.setState({ messageInput: "" });
+    const body = this.state.messageInput;
+    const nickname = this.state.nicknameInput;
+    this.props.messageSubmit({ nickname, body });
+    this.setState({ messageInput: '' });
   };
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <p>
-          <label name="item-input">Message here:</label>
-
+        <label name="nickname-input">
+          Nickname:
+          <input
+            className="inputBox"
+            onChange={this.handleChange}
+            type="text"
+            value={this.state.nicknameInput}
+            name="item-input"
+            maxLength="200"
+            autoComplete="off"
+            size="50"
+            id="nicknameInput"
+          />
+        </label>
+        <label name="item-input">
+          Message:
           <input
             className="inputBox"
             onChange={this.handleChange}
@@ -30,8 +46,9 @@ class MessageInput extends PureComponent {
             maxLength="200"
             autoComplete="off"
             size="50"
+            id="messageInput"
           />
-        </p>
+        </label>
         <input type="submit"></input>
       </form>
     );

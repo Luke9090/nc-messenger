@@ -7,7 +7,6 @@ export const connectToSocket = () => {
 
 export const listenForMessages = (socket, receiveMessage) => {
   // listen on socket for new messages, call receiveMessage with any received messages
-  receiveMessage({ body: 'fake live message' });
   socket.on('message', message => {
     receiveMessage(message);
   });
