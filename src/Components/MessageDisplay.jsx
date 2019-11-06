@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from "react";
+import "./MessageDisplay.css";
 
 class MessageDisplay extends PureComponent {
   state = {
@@ -18,11 +19,13 @@ class MessageDisplay extends PureComponent {
   render() {
     const { messages } = this.state;
     return (
-      <ul>
-        {messages.map(message => {
-          return <li key={message.body}>{message.body}</li>;
-        })}
-      </ul>
+      <div className="messageBody">
+        <ul>
+          {messages.map(message => {
+            return <li key={message.body}>> {message.body}</li>;
+          })}
+        </ul>
+      </div>
     );
   }
 }
