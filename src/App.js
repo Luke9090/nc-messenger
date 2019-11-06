@@ -1,19 +1,21 @@
 import React, { PureComponent } from 'react';
 import './App.css';
 import * as db from './utils/db';
-import * as sockets from './utils/sockets';
+import * as socketUtils from './utils/sockets';
 import MessageDisplay from './Components/MessageDisplay';
 import MessageInput from './Components/MessageInput';
 
 class App extends PureComponent {
   state = {
-    messages: []
+    messages: [],
+    socket: null
   };
 
   componentDidMount = () => {
     db.getStoredMessages().then(messages => {
-      this.setState({ messages }, () => {
-        sockets.subscribeToMessages(this.receiveMessage);
+      this.setState({ messages, socket: socketUtils.connectToSocket() }, () => {
+        const { socket } = this.state;
+        socketUtils.listenForMessages(socket, this.receiveMessage);
       });
     });
   };
@@ -25,7 +27,7 @@ class App extends PureComponent {
   };
 
   messageSubmit = message => {
-    console.log(message);
+    socketUtils.emitMessage(message);
   };
 
   render() {

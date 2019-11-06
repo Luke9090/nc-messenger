@@ -2,6 +2,9 @@ const io = require('socket.io')();
 
 io.on('connection', client => {
   console.log('client connected');
+  client.on('disconnect', client => {
+    console.log('client disconnected');
+  });
 });
 
 const port = 8000;
