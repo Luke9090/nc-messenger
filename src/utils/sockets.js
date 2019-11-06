@@ -1,7 +1,7 @@
 import openSocket from 'socket.io-client';
 
 export const connectToSocket = () => {
-  const socket = openSocket('http://localhost:8000');
+  const socket = openSocket(`http://${window.location.hostname || 'localhost'}:8000`);
   return socket;
 };
 
