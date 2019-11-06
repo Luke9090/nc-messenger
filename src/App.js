@@ -4,7 +4,7 @@ import * as db from './utils/db';
 import * as socketUtils from './utils/sockets';
 import MessageDisplay from './Components/MessageDisplay';
 import MessageInput from './Components/MessageInput';
-// import Header from './Components/Header';
+import Header from './Components/Header';
 
 class App extends PureComponent {
   state = {
@@ -36,7 +36,7 @@ class App extends PureComponent {
     const { messages } = this.state;
     return (
       <div className="App">
-        {/* <Header /> */}
+        <Header />
         <MessageDisplay messages={messages} />
         <MessageInput messageSubmit={this.messageSubmit} />
       </div>

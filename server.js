@@ -1,4 +1,5 @@
 const io = require('socket.io')();
+const { swearFilter } = require('./src/utils/swear-filter');
 
 io.on('connection', client => {
   console.log('client connected');
@@ -6,7 +7,7 @@ io.on('connection', client => {
     console.log('client disconnected');
   });
   client.on('message', message => {
-    io.emit('message', message);
+    io.emit('message', { ...message, body: swearFilter(message.body) });
   });
 });
 
