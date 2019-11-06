@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { PureComponent } from 'react';
 import './App.css';
+import * as db from './utils/db';
+import * as sockets from './utils/sockets';
+import MessageDisplay from './Components/MessageDisplay';
+import MessageInput from './Components/MessageInput';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends PureComponent {
+  state = {
+    messages: []
+  };
+
+  componentDidMount = () => {
+    db.getStoredMessages().then(messages => {
+      this.setState({ messages }, () => {
+        sockets.subscribeToMessages(this.receiveMessage);
+      });
+    });
+  };
+
+  receiveMessage = message => {
+    this.setState(current => {
+      return { messages: [...current.messages, message] };
+    });
+  };
+
+  messageSubmit = message => {
+    console.log(message);
+  };
+
+  render() {
+    const { messages } = this.state;
+    return (
+      <div className="App">
+        <MessageDisplay messages={messages} />
+        <MessageInput messageSubmit={this.messageSubmit} />
+      </div>
+    );
+  }
 }
 
 export default App;
