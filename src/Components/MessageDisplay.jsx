@@ -1,5 +1,5 @@
-import React, { PureComponent } from "react";
-import "./MessageDisplay.css";
+import React, { PureComponent } from 'react';
+import './MessageDisplay.css';
 
 class MessageDisplay extends PureComponent {
   state = {
@@ -22,7 +22,11 @@ class MessageDisplay extends PureComponent {
       <div className="messageBody">
         <ul>
           {messages.map(message => {
-            return <li key={message.body}>> {message.body}</li>;
+            return (
+              <li key={message.body}>
+                {message.nickname} > {message.body}
+              </li>
+            );
           })}
         </ul>
       </div>
