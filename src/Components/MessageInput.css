@@ -1,0 +1,19 @@
+.messageFooter {
+  border-style: solid;
+
+  margin: 0px 10px;
+}
+.messageFooter form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.messageFooter label {
+  padding: 10px;
+}
+.nameInput {
+  width: 150px;
+}
+.messageInput {
+  width: 450px;
+}
